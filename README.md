@@ -1,0 +1,2 @@
+# CS377_Final_Project_Breast_Cancer_Detection
+Artificial intelligence project to detect breast cancer
