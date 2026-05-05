@@ -31,5 +31,32 @@ def print_data_info(data):
     print(data.describe())
 
 
+
+
+
+
+
+def graph(df):
+    """Creates a scatter plot of radius_mean vs texture_mean and waits until the plot is closed."""
+    fig = plt.figure()
+    plt.scatter(df["radius_mean"], df["texture_mean"])
+    plt.xlabel("Radius Mean")
+    plt.ylabel("Texture Mean")
+    plt.title("Radius vs Texture")
+
+    plt.show()  # waits until closed
+
+    return not plt.fignum_exists(fig.number)
+
 if __name__ == "__main__":
-    print_data_info(data)
+    try:
+        while True:
+            print("Running...")
+            print_data_info(data)
+            
+            closed = graph(data)
+            if closed:
+                break
+
+    except KeyboardInterrupt:
+        print("\nStopped by user")
