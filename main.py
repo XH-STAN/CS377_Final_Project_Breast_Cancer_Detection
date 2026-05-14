@@ -230,11 +230,18 @@ if __name__ == "__main__":
     X_train, X_test = scale_data(X_train, X_test)
 
 
+    # train the decision tree model using the training data and evaluate its performance on the testing data. The function will print out the confusion matrix, accuracy, sensitivity, and specificity of the model, which are important metrics for assessing the performance of a classification model in the context of breast cancer detection.
+    tree_model = train_decision_tree(X_train, X_test, y_train, y_test)
     
-    tree_model = train_decision_tree(X_train, X_test, y_train, y_test)# train the decision tree model using the training data and evaluate its performance on the testing data. The function will print out the confusion matrix, accuracy, sensitivity, and specificity of the model, which are important metrics for assessing the performance of a classification model in the context of breast cancer detection.
-
-    visualize_decision_tree(tree_model, cleaned_data.drop(columns=["diagnosis"]).columns) # visualize the structure of the trained decision tree model using a plot. This visualization can help you understand how the model makes decisions based on the features in the dataset, and it can also provide insights into which features are most important for predicting breast cancer.
-
-    forest_trees = train_random_forest_map_reduce(X_train,X_test,y_train,y_test)# train a random forest model using a map-reduce approach, where multiple decision trees are trained with different maximum depths (3, 5, and 7) and their predictions are combined using majority voting. The function will print out the confusion matrix, accuracy, sensitivity, and specificity of the random forest model, allowing you to compare its performance with the decision tree model.
     
-    visualize_random_forest_trees(forest_trees,cleaned_data.drop(columns=["diagnosis"]).columns)
+    # visualize the structure of the trained decision tree model using a plot. This visualization can help you understand how the model makes decisions based on the features in the dataset, and it can also provide insights into which features are most important for predicting breast cancer.
+    visualize_decision_tree(tree_model, cleaned_data.drop(columns=["diagnosis"]).columns) 
+    
+    
+    # train a random forest model using a map-reduce approach, where multiple decision trees are trained with different maximum depths (3, 5, and 7) and their predictions are combined using majority voting. The function will print out the confusion matrix, accuracy, sensitivity, and specificity of the random forest model, allowing you to compare its performance with the decision tree model.
+    forest_trees = train_random_forest_map_reduce(X_train,X_test,y_train,y_test)
+        
+        
+        
+    # visualize the individual trees in the random forest model using plots. This can help you understand how each tree contributes to the overall predictions of the random forest and can provide insights into the importance of different features for predicting breast cancer.
+    visualize_random_forest_trees(forest_trees,cleaned_data.drop(columns=["diagnosis"]).columns) 
